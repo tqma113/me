@@ -1,0 +1,191 @@
+.photography {
+  width: 100%;
+}
+.photography .title-container {
+  box-sizing: border-box;
+  margin: 0px 0px 64px;
+  min-width: 0px;
+  width: 100%;
+  display: block;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+.photography .title-container .title {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 48px;
+}
+.photography .photos {
+  margin-bottom: 64px;
+}
+.photography .photos .photos-year h2 {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 42px;
+}
+.photography .photos .photos-year h2 a {
+  color: var(--link-color, #d84136);
+  -webkit-transition: color 0s ease;
+  transition: color 0s ease;
+}
+.photography .photos .photos-year .photos-month h3 {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 32px;
+}
+.photography .photos .photos-year .photos-month h3 a {
+  color: var(--link-color, #d84136);
+  -webkit-transition: color 0s ease;
+  transition: color 0s ease;
+}
+.photography .photos .photos-year .photos-month .photo-list {
+  display: block;
+}
+.photography .photos .photos-year .photos-month .photo-list .double-photo > * ~ * {
+  margin-top: 18px;
+}
+.photography .photos .photos-year .photos-month .photo-list > * ~ * {
+  margin-top: 18px;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo .title {
+  position: absolute;
+  visibility: hidden;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: -webkit-gradient(linear, left bottom, left top, from(transparent), to(rgba(0, 0, 0, 0.6)));
+  background: -webkit-linear-gradient(bottom, transparent, rgba(0, 0, 0, 0.6));
+  background: -moz-linear-gradient(bottom, transparent 0, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(0deg, transparent 0, rgba(0, 0, 0, 0.6));
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #fff;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo .title .title-content {
+  text-align: left;
+  top: 0;
+  left: 10px;
+  line-height: 20px;
+  padding-left: 10px;
+  padding-top: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo .info {
+  position: absolute;
+  visibility: hidden;
+  z-index: 101;
+  display: flex;
+  min-height: 50px;
+  justify-content: space-between;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.6)));
+  background: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.6));
+  background: -moz-linear-gradient(top, transparent 0, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, 0.6));
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #fff;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo .info .location {
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 110px;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  text-align: left;
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.6);
+}
+.photography .photos .photos-year .photos-month .photo-list .photo .info .date {
+  opacity: 0;
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo:hover .title {
+  visibility: visible;
+  opacity: 1;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo:hover .info {
+  visibility: visible;
+  opacity: 1;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo:hover .info .location {
+  opacity: 1;
+  bottom: 5px;
+  -webkit-transition: bottom 0.2s;
+  -moz-transition: bottom 0.2s;
+  transition: bottom 0.2s;
+}
+.photography .photos .photos-year .photos-month .photo-list .photo:hover .info .date {
+  visibility: visible;
+  opacity: 1;
+  bottom: 5px;
+  -webkit-transition: bottom 0.2s;
+  -moz-transition: bottom 0.2s;
+  transition: bottom 0.2s;
+}
+@media screen and (min-width: 769px) {
+  .photography .photos {
+    margin-bottom: 256px;
+  }
+  .photography .photos .photos-year .photos-month .photo-list .double-photo {
+    display: flex;
+    justify-content: space-between;
+  }
+  .photography .photos .photos-year .photos-month .photo-list .double-photo .photo {
+    width: calc(50% - 9px);
+  }
+  .photography .photos .photos-year .photos-month .photo-list .double-photo > * ~ * {
+    margin-left: 18px;
+    margin-top: 0;
+  }
+}
+@media screen and (min-width: 640px) {
+  .photography .title-container {
+    display: flex;
+  }
+  .photography .photos {
+    margin-bottom: 128px;
+  }
+}
+
+
+/*# sourceMappingURL=photography.css.map*/

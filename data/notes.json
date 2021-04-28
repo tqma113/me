@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "title": "TypeScript: type & interface",
+    "name": "typescripttypeinterface",
+    "createTime": "1604991366158",
+    "modifiedTime": "1604991366158",
+    "description": "After 3 months of use, I learned a few things in TypeScript. Let me summarize. What you need to understand before reading this article is that the content of this article is only a personal opinion, and I am not the main maintainer and contributor of TypeScript, nor have I invited the authoritative person of TypeScript to review it, so I cannot guarantee the complete correctness of this article. But I have repeatedly revised the content of this article to try to ensure its accuracy. When you find any technical errors or controversial ideologies, please raise them in the comment area. I will update the content in time to avoid misleading others.",
+    "tags": [1, 2],
+    "tip": "About 8 min read"
+  }
+]

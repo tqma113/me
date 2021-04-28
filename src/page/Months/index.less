@@ -1,0 +1,67 @@
+.months {
+  width: 100%;
+  .title-container {
+    box-sizing: border-box;
+    margin: 0px 0px 64px;
+    min-width: 0px;
+    width: 100%;
+    display: block;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+
+    .title {
+      box-sizing: border-box;
+      min-width: 0px;
+      font-family: 'Avenir Next';
+      font-weight: 600;
+      line-height: 1.25;
+      margin: 32px 0px 16px;
+      font-size: 48px;
+    }
+  }
+
+  .photos {
+    margin-bottom: 64px;
+
+    .photos-year {
+      h2 {
+        box-sizing: border-box;
+        min-width: 0px;
+        font-family: 'Avenir Next';
+        font-weight: 600;
+        line-height: 1.25;
+        margin: 32px 0px 16px;
+        font-size: 42px;
+      }
+
+      .photos-month {
+        h3 {
+          box-sizing: border-box;
+          min-width: 0px;
+          font-family: 'Avenir Next';
+          font-weight: 600;
+          line-height: 1.25;
+          margin: 32px 0px 16px;
+          font-size: 32px;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    .photos {
+      margin-bottom: 256px;
+    }
+  }
+
+  @media screen and (min-width: 640px) {
+    .title-container {
+      display: flex;
+    }
+    .photos {
+      margin-bottom: 128px;
+    }
+  }
+}

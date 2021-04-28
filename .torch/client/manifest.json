@@ -1,0 +1,39 @@
+{
+  "name": "Ma Tianqi",
+  "manifest_version": 2,
+  "short_name": "tqma",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "landscape",
+  "theme_color": "#d84136",
+  "background_color": "#fff",
+  "description": "Ma Tianqi's personal website.",
+  "permissions": ["webNavigation"],
+  "version": "0.1",
+  "browser_action": {
+    "default_icon": {
+      "16": "/favicon-16x16.png",
+      "24": "/favicon-32x32.png",
+      "32": "/favicon.ico"
+    },
+    "default_title": "Ma Tianqi"
+  },
+  "default_locale": "en",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

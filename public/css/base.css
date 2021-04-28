@@ -1,0 +1,626 @@
+html {
+  /*滚动事件发生在 html 元素上；JS 中可以监听 html 的滚动*/
+  overflow-y: auto;
+  /*让 html 和浏览器窗口高度一致*/
+  height: 100%;
+  /*少数浏览器默认背景色为浅灰色，所以设置默认背景颜色为纯白*/
+  background-color: #fff;
+}
+
+html,
+body {
+  font-family: 'Avenir Next', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 1.75;
+  font-weight: 400;
+  /*body 宽度大 html 度时，某些浏览器会出现内部滚动条；所以设置「html、body」宽度相同且「overflow-x: hidden」*/
+  overflow-x: hidden;
+  width: 100%;
+  /*取消部分浏览器点击有阴影*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /*优化移动端滚动事件*/
+  -webkit-overflow-scrolling: touch;
+}
+
+/**
+ * 移除常用标签的浏览器默认的「margin、padding」
+ * pre、code、legend、fieldset、blockquote … 等标签不是很常用，所以就不一一列举，如果项目中使用到，可以自己单独写
+ */
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dd,
+ul,
+ol,
+th,
+td,
+button,
+figure,
+input,
+textarea,
+form {
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * 不同浏览器的 input、select、textarea 的盒子模型宽度计算方式不同，统一为最常见的 content-box
+ */
+
+input,
+select,
+textarea {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+table {
+  /*table 相邻单元格的边框间的距离设置为 0*/
+  border-spacing: 0;
+  /*默认情况下给 tr 设置 border 没有效果，如果 table 设置了边框为合并模式：「border-collapse: collapse;」就可以了*/
+  border-collapse: collapse;
+}
+
+/**
+ * 移除浏览器部分元素的默认边框
+ * acronym、fieldset … 等其他标签不是很常用，就不会一一列举；如果项目中用到，可以自己单独写
+ */
+
+img,
+input,
+button,
+textarea {
+  border: none;
+  -webkit-appearance: none;
+}
+
+input {
+  /*由于 input 默认不继承父元素的居中样式，所以设置：「text-align: inherit」*/
+  text-align: inherit;
+}
+
+textarea {
+  /*textarea 默认不可以放缩*/
+  resize: none;
+}
+
+/**
+ * 由于以下元素的部分属性没有继承父节点样式，所以声明这些元素的这些属性为父元素的属性
+ * 取消这些元素 `outline` 样式
+ */
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+select,
+button,
+option,
+textarea,
+optgroup {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/**
+ * 取消超链接元素的默认文字装饰
+ * 另外 del、ins 标签的中划线、下划线还是挺好的，就不去掉
+ */
+
+a {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  /*开发中 UI 设计的列表都是和原生的样式差太多，所以直接给取消 ol，ul 默认列表样式*/
+  list-style: none;
+}
+
+button,
+input[type='submit'],
+input[type='button'] {
+  /*鼠标经过是「小手」形状表示可点击*/
+  cursor: pointer;
+}
+
+input::-moz-focus-inner {
+  /*取消火狐浏览器部分版本 input 聚焦时默认的「padding、border」*/
+  padding: 0;
+  border: 0;
+}
+
+/*取消部分浏览器数字输入控件的操作按钮*/
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+/*输入控件 placeholder 色设置 #999*/
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #999;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #999;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #999;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #999;
+}
+
+template {
+  /*由于部分浏览 template 会显示出来，所以要隐*/
+  display: none;
+}
+
+:root {
+  --background-color: #fff;
+  --text-primary-color: #424242;
+  --text-second-color: #636363;
+  --link-color: #d84136;
+  --link-hover-color: #db7572;
+  --link-active-color: #db7572;
+  --code-background-color: #f6f6f6;
+  --divider-color: #ccc;
+}
+
+.dark {
+  --background-color: #131313;
+  --text-primary-color: #dcdbdc;
+  --text-second-color: #bfbfbf;
+  --link-color: #e79a99;
+  --link-hover-color: #e35750;
+  --link-active-color: #e35750;
+  --code-background-color: #050505;
+  --divider-color: #ccc;
+}
+
+body {
+  background: var(--background-color, #fff);
+  color: var(--text-primary-color, #424242);
+  -webkit-transition: color 0.35s ease, background-color 0.35s ease;
+  transition: color 0.35s ease, background-color 0.35s ease;
+}
+
+.text {
+  color: var(--text-primary-color, #424242);
+  -webkit-transition: color 0.35s ease;
+  transition: color 0.35s ease;
+}
+
+.link {
+  color: var(--link-color, #d84136);
+  -webkit-transition: color 0s ease;
+  transition: color 0s ease;
+  font-weight: 500;
+}
+.link-with-underline {
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: var(--link-hover-color, #db7572);
+}
+.link:active {
+  color: var(--link-active-color, #db7572);
+}
+.icon {
+  fill: var(--link-color, #d84136);
+}
+
+#root > .container {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 'header' 'content' 'footer';
+}
+
+#root > .container > .header {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+#root > .container > .header > .header-box {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+#root > .container > .header > .header-box > .nav {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+#root > .container > .header > .header-box > .nav > .tail {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: flex;
+  cursor: default;
+}
+
+#root > .container > .header > .header-box > .nav > span {
+  font-weight: 550;
+  font-style: italic;
+}
+
+#root > .container > .header > .header-box > .nav > span > a {
+  font-weight: 550;
+}
+
+#root > .container > .header > .header-box > .operation {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+#root > .container > .header > .header-box > .operation > * {
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#root > .container > .header > .header-box > .operation > * + * {
+  margin-left: 10px;
+}
+
+#root > .container > .header > .header-box > .operation > .theme-toggle {
+  opacity: 0.65;
+  position: relative;
+  border-radius: 5px;
+  width: 40px;
+  height: 25px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#root
+  > .container
+  > .header
+  > .header-box
+  > .operation
+  > .theme-toggle
+  > .light {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: all 0.45s ease;
+  transition: all 0.45s ease;
+  overflow: hidden;
+  box-shadow: inset 8px -8px 0px 0px var(--theme-ui-colors-toggleIcon, #121212);
+}
+
+#root
+  > .container
+  > .header
+  > .header-box
+  > .operation
+  > .theme-toggle
+  > .light::before {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  height: 24px;
+  width: 24px;
+  border: none;
+  border-radius: 50%;
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+  opacity: 1;
+  -webkit-transition: -webkit-transform 0.45s ease;
+  -webkit-transition: transform 0.45s ease;
+  transition: transform 0.45s ease;
+}
+
+#root
+  > .container
+  > .header
+  > .header-box
+  > .operation
+  > .theme-toggle
+  > .light::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: -4px 0 0 -4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 -23px 0 #121212, 0 23px 0 #121212, 23px 0 0 #121212,
+    -23px 0 0 #121212, 15px 15px 0 #121212, -15px 15px 0 #121212,
+    15px -15px 0 #121212, -15px -15px 0 #121212;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+
+#root
+  > .container
+  > .header
+  > .header-box
+  > .operation
+  > .theme-toggle
+  > .dark {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 4px solid #e2e2e2;
+  background-color: #e2e2e2;
+  transform: scale(0.55);
+  transition: all 0.45s ease 0s;
+  overflow: visible;
+  box-shadow: none;
+}
+
+#root
+  > .container
+  > .header
+  > .header-box
+  > .operation
+  > .theme-toggle
+  > .dark::before {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  height: 24px;
+  width: 24px;
+  border: 2px solid #e2e2e2;
+  border-radius: 50%;
+  transform: translate(14px, -14px);
+  opacity: 0;
+  transition: transform 0.45s ease 0s;
+}
+
+#root
+  > .container
+  > .header
+  > .header-box
+  > .operation
+  > .theme-toggle
+  > .dark::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: -4px 0px 0px -4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 -23px 0 #e2e2e2, 0 23px 0 #e2e2e2, 23px 0 0 #e2e2e2,
+    -23px 0 0 #e2e2e2, 15px 15px 0 #e2e2e2, -15px 15px 0 #e2e2e2,
+    15px -15px 0 #e2e2e2, -15px -15px 0 #e2e2e2;
+  transform: scale(1);
+  transition: all 0.35s ease 0s;
+}
+
+#root > .container > .main {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-bottom: 32px;
+}
+
+#root > .container > .footer {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+  color: var(--text-second-color, #636363);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media screen and (min-width: 640px) {
+  #root > .container > .header {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  #root > .container > .header > .header-box {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  #root > .container > .header > .header-box > .operation {
+    margin-bottom: 0;
+  }
+  #root > .container > .main {
+    padding-left: 32px;
+    padding-right: 32px;
+    margin-bottom: 64px;
+  }
+  #root > .container > .footer {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  #root > .container > .header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #root > .container > .header > .header-box > .operation {
+    margin-bottom: 0;
+  }
+  #root > .container > .main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #root > .container > .main > * {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+  #root > .container > .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.back-to-top {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}

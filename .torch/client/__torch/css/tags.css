@@ -1,0 +1,60 @@
+.tags {
+  width: 100%;
+}
+.tags .title-container {
+  box-sizing: border-box;
+  margin: 0px 0px 64px;
+  min-width: 0px;
+  width: 100%;
+  display: block;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+.tags .title-container .title {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 48px;
+}
+.tags .tags-container {
+  margin-bottom: 64px;
+}
+.tags .tags-container .tag-list {
+  box-sizing: border-box;
+  margin: 0px 0px 8px;
+  min-width: 0px;
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+.tags .tags-container .tag-list .tag-count {
+  box-sizing: border-box;
+  margin: 0px 0px 0px 8px;
+  min-width: 0px;
+  color: var(--text-second-color, #bfbfbf);
+}
+@media screen and (min-width: 769px) {
+  .tags .tags-container {
+    margin-bottom: 256px;
+  }
+}
+@media screen and (min-width: 640px) {
+  .tags .title-container {
+    display: flex;
+  }
+  .tags .tags-container {
+    margin-bottom: 128px;
+  }
+}
+
+
+/*# sourceMappingURL=tags.css.map*/

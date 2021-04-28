@@ -1,0 +1,81 @@
+.notes {
+  width: 100%;
+}
+.notes .title-container {
+  box-sizing: border-box;
+  margin: 0px 0px 64px;
+  min-width: 0px;
+  width: 100%;
+  display: block;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+.notes .title-container .title {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 48px;
+}
+.notes .note-list-container {
+  width: 100%;
+}
+.notes .note-list-container .note-list .note {
+  box-sizing: border-box;
+  margin: 0px 0px 64px;
+  min-width: 0px;
+}
+.notes .note-list-container .note-list .note .note-title-container {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+}
+.notes .note-list-container .note-list .note .note-title-container .note-title {
+  box-sizing: border-box;
+  margin: 0px 0px 4px;
+  min-width: 0px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.notes .note-list-container .note-list .note .note-time-container {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  color: var(--text-second-color, #636363);
+}
+.notes .note-list-container .note-list .note .note-description {
+  box-sizing: border-box;
+  margin: 16px 0px 0px;
+  min-width: 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+  display: -webkit-box;
+  margin-top: 4px;
+}
+@media screen and (min-width: 769px) {
+  .notes .note-list-container {
+    margin-bottom: 256px;
+  }
+}
+@media screen and (min-width: 640px) {
+  .notes .title-container {
+    display: flex;
+  }
+  .notes .note-list-container {
+    margin-bottom: 128px;
+  }
+  .notes .note-list-container .note-list .note .note-title-container .note-title {
+    margin-bottom: 8px;
+  }
+}
+
+
+/*# sourceMappingURL=notes.css.map*/

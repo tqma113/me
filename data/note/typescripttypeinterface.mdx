@@ -1,0 +1,269 @@
+> After 3 months of use, I learned a few things in TypeScript. Let me summarize. What you need to understand before reading this article is that the content of this article is only a personal opinion, and I am not the main maintainer and contributor of TypeScript, nor have I invited the authoritative person of TypeScript to review it, so I cannot guarantee the complete correctness of this article. But I have repeatedly revised the content of this article to try to ensure its accuracy. When you find any technical errors or controversial ideologies, please raise them in the comment area. I will update the content in time to avoid misleading others.
+
+---
+
+The `type` and `interface` are put together because some of their behaviors are similar, and the difference is some completely unrelated special abilities.
+
+Before entering this section as a whole, there is also a concept to be clear:
+
+There are two types of programming language subtypes: nominal subtypes and structural subtypes. Nominal subtype refers to, for example, the inheritance of classes in Java. The subtype is the subtype of the parent. The only way to establish the relationship between the parent and the child is `extends` (`implements` of the interface are also counted). Only when `extends` will the parent and child appear Type, that is, only `extends` can make them a nominal parent-child type. The structure subtype is the same structure, and TypeScript is the structure subtype, that is, in TypeScript.
+
+```ts
+type Foo = {
+  a: string
+}
+```
+
+and
+
+```ts
+type Bar = {
+  a: string
+}
+```
+
+are the same type and do not need extends (although extends can also create subtypes, they are essentially structurally similar). So in
+
+```ts
+type Foo = {
+  a: string
+}
+type Bar = {
+  a: string
+  b: number
+}
+```
+
+`Bar` is a subtype of `Foo`.
+
+## Similar feature
+
+#### Object argument type structure definition
+
+```ts
+interface Foo {
+  a: string
+}
+```
+
+and
+
+```ts
+type Foo {
+    a: string
+}
+```
+
+Both define an object structure with `a` attribute.
+
+#### Function type
+
+The function type is actually composed of two parts, the parameter type and the return value type.
+
+```ts
+interface Foo {
+  (a: string): string
+}
+```
+
+and
+
+```ts
+type Foo = (a: string) => string
+```
+
+Represents a function of the same type. The function type will be described in detail in the next article.
+
+#### Mixed type
+
+Due to the dynamic and flexible nature of JavaScript, you may sometimes encounter an object that can be used as a combination of some of the above types, which is a type that has both functional and object characteristics, and it has some properties. as follows:
+
+```ts
+interface Counter {
+  (start: number): string
+  interval: number
+  reset(): void
+}
+
+function getCounter(): Counter {
+  let counter = function (start: number) {} as Counter
+  counter.interval = 123
+  counter.reset = function () {}
+  return counter
+}
+
+let c = getCounter()
+c(10)
+c.reset()
+c.interval = 5.0
+```
+
+where
+
+```ts
+interface Counter {
+  (start: number): string
+  interval: number
+  reset(): void
+}
+```
+
+You can also use `type` to achieve:
+
+```ts
+type Counter = {
+  (start: number): string
+  interval: number
+  reset(): void
+}
+```
+
+#### About `|` and `&` operator behave exactly the same
+
+The type of
+
+```ts
+type Foo = {
+  a: string
+}
+type Bar = {
+  b: number
+}
+type Baz = Foo & Bar
+```
+
+and
+
+```ts
+interface Foo {
+  a: string
+}
+interface Bar {
+  b: number
+}
+type Baz = Foo & Bar
+```
+
+are exactly the same, as is the `|` operator.
+
+In my opinion, both the `&` and `|` operators create a new type, and it is a type on the parent-child type chain of the related type. The difference between them is that their products are different roles in the parent-child type chain. As shown above, in the first piece of code, the `&` operator is used for `Foo` and `Bar` to create a new type `Baz`. The result is that `Baz` is a subtype of `Foo` and `Bar`, that is, how can variables of type `Bar` be assigned to `Foo` and Variable of type `Bar`. In the second piece of code, the `|` operator is used for `Foo` and `Bar` to create a new type `Baz`. The result is that `Baz` is the parent type of `Foo` and `Bar`, that is, variables of type `Foo` and `Bar` can be assigned to `Bar`.
+
+#### Optional attributes
+
+Both
+
+```ts
+interface Foo {
+  a?: string
+}
+```
+
+and
+
+```ts
+type Foo = {
+  a?: string
+}
+```
+
+indicate that `a` is optional.
+
+Optional attributes need to pay attention to a?: string is not equal to a: string | undefined, if you want to know why, you can read this [issue 32695](https://github.com/microsoft/TypeScript/pull/32695).
+
+#### Index type
+
+Both
+
+```ts
+interface Foo {
+  [x: string]: number
+  [x: number]: string
+}
+```
+
+and
+
+```ts
+type Foo = {
+  [x: string]: number
+  [x: number]: string
+}
+```
+
+Both indicate that the type of the attribute whose index is `string` is `number`, and the type of the attribute whose index is `number` is `string`.
+
+#### Used for class implements
+
+```ts
+interface ClockInterface {
+  currentTime: Date
+}
+
+class Clock implements ClockInterface {
+  currentTime: Date = new Date()
+  constructor(h: number, m: number) {}
+}
+```
+
+In TypeScript, the `implements` operation only provides a type constraint for the `class` and has no other effect. Therefore, the types that mainly conform to the `class` structure can be implemented. So in addition to `interface`, `type` can also be implemented. But because the introduction of classes in JavaScript is done in accordance with OOP, when `implements` are needed, using `interface` has a stronger semantic meaning.
+
+## Diff feature
+
+#### `type`
+
+(1) Type alias
+
+It's very simple, just create another name for the existing type, which represents exactly the same meaning. E.g:
+
+```ts
+type ObjectAlias = object
+```
+
+Although this feature is unique to `type`, when the original `type` is not a primitive type, that is, when the original type is not `number`, `string`, `boolean`, `object`, `symbol`, `null`, `undefined`, `void`, `never`, `unknown`, `any`, the `interface` can use the following Ways to achieve similar functions:
+
+```ts
+interface Foo {
+  a: string
+}
+interface FooAlias extends Foo {}
+```
+
+#### `interface`
+
+(1) Extends interface
+
+```ts
+interface Foo {
+  a: string
+}
+interface Bar extends Foo {
+  b: number
+}
+```
+
+Use `&` here to achieve a similar effect, as follows:
+
+```ts
+interface Foo {
+  a: string
+}
+type Bar = Foo & {
+  b: number
+}
+```
+
+(2) Extends class
+
+```ts
+class Control {
+  private state: any
+}
+
+interface SelectableControl extends Control {
+  select(): void
+}
+```
+
+In the class declaration, an interface describing the structure and type of the class is also declared at the same time, so the expansion operation here is similar to the above (1).
+
+That's all.

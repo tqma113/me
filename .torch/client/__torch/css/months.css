@@ -1,0 +1,60 @@
+.months {
+  width: 100%;
+}
+.months .title-container {
+  box-sizing: border-box;
+  margin: 0px 0px 64px;
+  min-width: 0px;
+  width: 100%;
+  display: block;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+.months .title-container .title {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 48px;
+}
+.months .photos {
+  margin-bottom: 64px;
+}
+.months .photos .photos-year h2 {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 42px;
+}
+.months .photos .photos-year .photos-month h3 {
+  box-sizing: border-box;
+  min-width: 0px;
+  font-family: 'Avenir Next';
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 32px 0px 16px;
+  font-size: 32px;
+}
+@media screen and (min-width: 769px) {
+  .months .photos {
+    margin-bottom: 256px;
+  }
+}
+@media screen and (min-width: 640px) {
+  .months .title-container {
+    display: flex;
+  }
+  .months .photos {
+    margin-bottom: 128px;
+  }
+}
+
+
+/*# sourceMappingURL=months.css.map*/
